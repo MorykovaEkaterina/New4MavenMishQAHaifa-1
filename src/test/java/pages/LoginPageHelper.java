@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,8 +51,18 @@ public class LoginPageHelper extends PageBase {
     }
 
     public String getAlertText() {
-        waitUntilElementIsLoaded(driver, alertText,20);
+        waitUntilElementIsLoaded(driver, alertText,30);
     return alertText.getText();
 
+    }
+
+    public LoginPageHelper pressCancelButton(){
+        cancelButton.click();
+        return this;
+    }
+
+    public LoginPageHelper waitUntilWindowIsClosed(){
+        waitUntilElementIsAbsent(driver, cancelButton,30);
+        return this;
     }
 }
