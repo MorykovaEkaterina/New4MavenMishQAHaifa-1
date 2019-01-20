@@ -9,6 +9,8 @@ import pages.HomePageHelper;
 import pages.LoginPageHelper;
 import pages.MenuPageHelper;
 import util.DataProviders;
+import org.apache.log4j.Logger;
+import util.LogLog4j;
 
 /**
  * Created by Inka on 19-Dec-18.
@@ -18,6 +20,7 @@ public class LoginPageTests extends TestBase {
     LoginPageHelper loginPage;
     EventsAuthPageHelper eventsAuthPage;
     MenuPageHelper menuPage;
+    private static Logger Log = Logger.getLogger(LogLog4j.class.getName());
 
     @BeforeMethod
     public void initPage(){
@@ -33,6 +36,11 @@ public class LoginPageTests extends TestBase {
     }
     @Test(dataProviderClass = DataProviders.class, dataProvider = "loginPositive")
     public void loginPositive(String email, String password)  {
+
+        Log.info("--------Test loginPositive was started---------");
+        Log.info("Parameter: email = " + email);
+        Log.info("Parameter: password = " + password);
+        Log.info("Test login Positive: homePage was opened");
         homePage.waitUntilPageLoad()
                 .pressLoginButton()
                 .waitUntilPageLoad();
