@@ -44,6 +44,7 @@ public class LoginPageTests extends TestBase {
         homePage.waitUntilPageLoad()
                 .pressLoginButton()
                 .waitUntilPageLoad();
+        Log.info("Test login Positive: loginPage was opened");
         loginPage.enterValueToFieldEmail(email)
                 .enterValueToFieldPassword(password)
                 .pressLogInButton();
@@ -63,16 +64,21 @@ public class LoginPageTests extends TestBase {
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "loginNegative")
     public void loginNegative(String email, String password){
+        Log.info("--------- Test loginNegative was started -----------");
+        Log.info("Parameter - email: " + email);
+        Log.info("Parameter - password: " + password);
+        Log.info("loginNegative: homePage is opened");
         homePage.waitUntilPageLoad()
                 .pressLoginButton();
+        Log.info("loginNegative: loginPage was opened");
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail(email)
                 .enterValueToFieldPassword(password)
                 .pressLogInButton();
-
-
        Assert.assertEquals("Wrong authorization, login or password",
-               loginPage.getAlertText());
+               loginPage.getAlertText(),
+               "alert 'Wrong authorization, login or password' wasn't given");
+       Log.info("loginNegative: loginPage was opened");
        loginPage.pressCancelButton()
                .waitUntilWindowIsClosed();
     }

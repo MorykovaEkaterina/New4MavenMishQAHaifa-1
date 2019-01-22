@@ -52,6 +52,8 @@ public class HomePageHelper extends PageBase {
     }
 
     public HomePageHelper pressLoginButton() {
+        Log.info("HomePageHelper: -- press Login button---");
+        Log.info("HomePageHelper: Login button was clicked");
         loginButton.click();
         return this;
     }
