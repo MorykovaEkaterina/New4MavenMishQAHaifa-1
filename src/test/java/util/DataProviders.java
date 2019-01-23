@@ -25,6 +25,15 @@ public class DataProviders {
         return chooseDataFromFile("/LoginNegative.data");
     }
 
+    @DataProvider
+    public static Iterator<Object[]> loginNegativeIncorrectEmail() throws IOException {
+        return chooseDataFromFile("/loginNegativeIncorrectEmail.data");
+    }
+    @DataProvider
+    public static Iterator<Object[]> loginNegativeIncorrectPassword() throws IOException {
+        return chooseDataFromFile("/loginNegativeIncorrectPassword.data");
+    }
+
     public static Iterator<Object[]> chooseDataFromFile(String fileName) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(DataProviders.class.getResourceAsStream(fileName)));
         List<Object[]> userData = new ArrayList<>();

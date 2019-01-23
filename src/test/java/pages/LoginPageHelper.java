@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.apache.log4j.Logger;
 import util.LogLog4j;
 
+import java.util.List;
+
 /**
  * Created by Inka on 26-Dec-18.
  */
@@ -22,6 +24,12 @@ public class LoginPageHelper extends PageBase {
     @FindBy(xpath =
             "//div[@class='alert alert-danger ng-star-inserted']")
     WebElement alertText;
+    @FindBy(xpath ="//*[contains(text(),'valid email')]")
+    WebElement alertEmail;
+    @FindBy(xpath ="//*[contains(text(),'Enter 6 characters')]")
+    WebElement alertPassword;
+
+
     private static Logger Log = Logger.getLogger(LogLog4j.class.getName());
 
 
@@ -79,5 +87,15 @@ public class LoginPageHelper extends PageBase {
         Log.info("LoginPageHelper: wait until Cancel button is absent");
         waitUntilElementIsAbsent(driver, cancelButton,30);
         return this;
+    }
+
+    public String getAlertEmail() {
+        waitUntilElementIsLoaded(driver, alertEmail, 30);
+        return alertEmail.getText();
+    }
+
+    public String getAlertPassword() {
+        waitUntilElementIsLoaded(driver, alertPassword, 30);
+        return alertPassword.getText();
     }
 }

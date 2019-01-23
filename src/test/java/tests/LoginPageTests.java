@@ -63,7 +63,7 @@ public class LoginPageTests extends TestBase {
     }
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "loginNegative")
-    public void loginNegative(String email, String password){
+    public void loginNegativeNoSuchUser(String email, String password){
         Log.info("--------- Test loginNegative was started -----------");
         Log.info("Parameter - email: " + email);
         Log.info("Parameter - password: " + password);
@@ -82,4 +82,35 @@ public class LoginPageTests extends TestBase {
        loginPage.pressCancelButton()
                .waitUntilWindowIsClosed();
     }
+    @Test(dataProviderClass = DataProviders.class,
+            dataProvider = "loginNegativeIncorrectPassword")
+    public void loginNegativePasswordIncorrect(String email, String password){
+        homePage.waitUntilPageLoad()
+                .pressLoginButton();
+        loginPage.waitUntilPageLoad()
+                .enterValueToFieldPassword(password)
+                .enterValueToFieldEmail(email);
+        Assert.assertEquals("Enter 6 characters",
+                loginPage.getAlertPassword(),
+                "AlertPassword text wasn't correct");
+        loginPage.pressCancelButton()
+                .waitUntilWindowIsClosed();
+    }
+
+    @Test(dataProviderClass = DataProviders.class,
+            dataProvider = "loginNegativeIncorrectEmail")
+    public void loginNegativeEmailIncorrect(String email, String password){
+        homePage.waitUntilPageLoad()
+                .pressLoginButton();
+        loginPage.waitUntilPageLoad()
+                .enterValueToFieldEmail(email)
+                .enterValueToFieldPassword(password);
+        Assert.assertEquals("Not a valid email",
+                loginPage.getAlertEmail(),
+                "AlertEmail text wasn't correct");
+        loginPage.pressCancelButton()
+                .waitUntilWindowIsClosed();
+    }
+
+
 }
