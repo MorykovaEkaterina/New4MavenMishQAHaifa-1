@@ -28,6 +28,8 @@ public class LoginPageHelper extends PageBase {
     WebElement alertEmail;
     @FindBy(xpath ="//*[contains(text(),'Enter 6 characters')]")
     WebElement alertPassword;
+    @FindBy(xpath = "//*[contains(text(),'This field is mandatory')]")
+    List<WebElement> emptyAlertsList;
 
 
     private static Logger Log = Logger.getLogger(LogLog4j.class.getName());
@@ -98,4 +100,8 @@ public class LoginPageHelper extends PageBase {
         waitUntilElementIsLoaded(driver, alertPassword, 30);
         return alertPassword.getText();
     }
+
+    public int getQuantityAlertsForEmptyFields(){
+        return emptyAlertsList.size();
+    };
 }

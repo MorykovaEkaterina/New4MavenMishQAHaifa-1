@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!--Your comment-->
 <suite name="Tests" verbose="5">
-  <test name="Test1">
+  <test name="tests from Home Page">
+    <!--<groups>
+      <run>
+        <exclude name="smoke"/>
+        <exclude name="regression"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="tests"/>
+    </packages>-->
     <classes>
       <class name="tests.HomePagesTests"/>
+    </classes>
+  </test>
+  <!--<test name="regression">
+    <groups>
+      <run>
+        <include name="regression"/>
+      </run>
+    </groups>
+    <classes>
       <class name="tests.LoginPageTests"/>
     </classes>
-  </test>  
+  </test>-->
 </suite>

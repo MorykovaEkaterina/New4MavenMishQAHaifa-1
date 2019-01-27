@@ -38,7 +38,7 @@ public class HomePagesTests extends TestBase {
                 "'Go to Event list' is equal to real name '" +
                 goToButtonName + "'");
 
-        Assert.assertEquals("Goo to Event list",goToButtonName,
+        Assert.assertEquals("Go to Event list",goToButtonName,
                 "'Go to Event list' is not equal to real name of the button");
     }
 

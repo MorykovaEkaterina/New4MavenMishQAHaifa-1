@@ -2,12 +2,14 @@ package tests;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.EventsAuthPageHelper;
 import pages.HomePageHelper;
 import pages.LoginPageHelper;
 import pages.MenuPageHelper;
+import ru.stqa.selenium.factory.WebDriverPool;
 import util.DataProviders;
 import org.apache.log4j.Logger;
 import util.LogLog4j;
@@ -22,7 +24,7 @@ public class LoginPageTests extends TestBase {
     MenuPageHelper menuPage;
     private static Logger Log = Logger.getLogger(LogLog4j.class.getName());
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage(){
         homePage = PageFactory
                 .initElements(driver, HomePageHelper.class);
@@ -34,6 +36,7 @@ public class LoginPageTests extends TestBase {
                 .initElements(driver,MenuPageHelper.class);
 
     }
+
     @Test(dataProviderClass = DataProviders.class, dataProvider = "loginPositive")
     public void loginPositive(String email, String password)  {
 
@@ -42,10 +45,10 @@ public class LoginPageTests extends TestBase {
         Log.info("Parameter: password = " + password);
         Log.info("Test login Positive: homePage was opened");
         homePage.waitUntilPageLoad()
-                .pressLoginButton()
-                .waitUntilPageLoad();
+                .pressLoginButton();
         Log.info("Test login Positive: loginPage was opened");
-        loginPage.enterValueToFieldEmail(email)
+        loginPage.waitUntilPageLoad()
+                .enterValueToFieldEmail(email)
                 .enterValueToFieldPassword(password)
                 .pressLogInButton();
         eventsAuthPage.waitUntilPageLoad();
@@ -62,7 +65,7 @@ public class LoginPageTests extends TestBase {
 
     }
 
-    @Test(dataProviderClass = DataProviders.class, dataProvider = "loginNegative")
+    @Test( dataProviderClass = DataProviders.class, dataProvider = "loginNegative")
     public void loginNegativeNoSuchUser(String email, String password){
         Log.info("--------- Test loginNegative was started -----------");
         Log.info("Parameter - email: " + email);
@@ -111,6 +114,41 @@ public class LoginPageTests extends TestBase {
         loginPage.pressCancelButton()
                 .waitUntilWindowIsClosed();
     }
+
+    @Test
+    public void loginNegativeEmptyEmailPassword(){
+        homePage.waitUntilPageLoad()
+                .pressLoginButton();
+        loginPage.waitUntilPageLoad()
+                .enterValueToFieldEmail("")
+                .enterValueToFieldPassword("")
+                .enterValueToFieldEmail("");
+        Assert.assertEquals(2,loginPage.getQuantityAlertsForEmptyFields());
+    }
+
+    @Test
+    public void loginNegativeOnlyEmailIsEmpty(){
+        homePage.waitUntilPageLoad()
+                .pressLoginButton();
+        loginPage.waitUntilPageLoad()
+                .enterValueToFieldEmail("")
+                .enterValueToFieldPassword("567890fgd")
+                .enterValueToFieldEmail("");
+        Assert.assertEquals(1,loginPage.getQuantityAlertsForEmptyFields());
+    }
+
+    @Test
+    public void loginNegativeOnlyPasswordIsEmpty(){
+        homePage.waitUntilPageLoad()
+                .pressLoginButton();
+        loginPage.waitUntilPageLoad()
+                .enterValueToFieldPassword("")
+                .enterValueToFieldEmail("test@mail.com")
+                .enterValueToFieldPassword("");
+        Assert.assertEquals(1,loginPage.getQuantityAlertsForEmptyFields());
+    }
+
+
 
 
 }
