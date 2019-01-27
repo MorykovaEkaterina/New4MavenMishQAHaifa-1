@@ -103,5 +103,5 @@ public class LoginPageHelper extends PageBase {
 
     public int getQuantityAlertsForEmptyFields(){
         return emptyAlertsList.size();
-    };
+    }
 }

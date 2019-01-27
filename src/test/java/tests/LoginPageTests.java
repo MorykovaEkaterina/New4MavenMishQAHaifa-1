@@ -34,19 +34,19 @@ public class LoginPageTests extends TestBase {
                 EventsAuthPageHelper.class);
         menuPage = PageFactory
                 .initElements(driver,MenuPageHelper.class);
+        Log.info("--------LoginPage Tests -BeforeMethod was started---------");
+        Log.info("--BeforeMethod: homePage is opened");
+        homePage.waitUntilPageLoad()
+                .pressLoginButton();
 
     }
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "loginPositive")
     public void loginPositive(String email, String password)  {
-
         Log.info("--------Test loginPositive was started---------");
         Log.info("Parameter: email = " + email);
         Log.info("Parameter: password = " + password);
         Log.info("Test login Positive: homePage was opened");
-        homePage.waitUntilPageLoad()
-                .pressLoginButton();
-        Log.info("Test login Positive: loginPage was opened");
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail(email)
                 .enterValueToFieldPassword(password)
@@ -70,9 +70,6 @@ public class LoginPageTests extends TestBase {
         Log.info("--------- Test loginNegative was started -----------");
         Log.info("Parameter - email: " + email);
         Log.info("Parameter - password: " + password);
-        Log.info("loginNegative: homePage is opened");
-        homePage.waitUntilPageLoad()
-                .pressLoginButton();
         Log.info("loginNegative: loginPage was opened");
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail(email)
@@ -88,8 +85,6 @@ public class LoginPageTests extends TestBase {
     @Test(dataProviderClass = DataProviders.class,
             dataProvider = "loginNegativeIncorrectPassword")
     public void loginNegativePasswordIncorrect(String email, String password){
-        homePage.waitUntilPageLoad()
-                .pressLoginButton();
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldPassword(password)
                 .enterValueToFieldEmail(email);
@@ -103,8 +98,6 @@ public class LoginPageTests extends TestBase {
     @Test(dataProviderClass = DataProviders.class,
             dataProvider = "loginNegativeIncorrectEmail")
     public void loginNegativeEmailIncorrect(String email, String password){
-        homePage.waitUntilPageLoad()
-                .pressLoginButton();
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail(email)
                 .enterValueToFieldPassword(password);
@@ -117,8 +110,6 @@ public class LoginPageTests extends TestBase {
 
     @Test
     public void loginNegativeEmptyEmailPassword(){
-        homePage.waitUntilPageLoad()
-                .pressLoginButton();
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail("")
                 .enterValueToFieldPassword("")
@@ -128,8 +119,6 @@ public class LoginPageTests extends TestBase {
 
     @Test
     public void loginNegativeOnlyEmailIsEmpty(){
-        homePage.waitUntilPageLoad()
-                .pressLoginButton();
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail("")
                 .enterValueToFieldPassword("567890fgd")
@@ -139,8 +128,6 @@ public class LoginPageTests extends TestBase {
 
     @Test
     public void loginNegativeOnlyPasswordIsEmpty(){
-        homePage.waitUntilPageLoad()
-                .pressLoginButton();
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldPassword("")
                 .enterValueToFieldEmail("test@mail.com")

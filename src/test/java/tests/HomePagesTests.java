@@ -24,13 +24,15 @@ public class HomePagesTests extends TestBase {
                 .initElements(driver, HomePageHelper.class);
         eventsUnAuthPage = PageFactory
                 .initElements(driver, EventsUnAuthPageHelper.class);
+        Log.info("--------BeforeMethod was stareted-----");
+        Log.info("Test openHomePage: wait until homePage is loaded");
+        homePage.waitUntilPageLoad();
+
 
     }
     @Test
     public void openHomePage()  {
         Log.info("--------Test openHomePage was stareted-----");
-        Log.info("Test openHomePage: wait until homePage is loaded");
-        homePage.waitUntilPageLoad();
         Log.info("Test openHomePage: get name of GoToEventButton");
         String goToButtonName =
                 homePage.getGoToEventButtonName();
@@ -44,8 +46,7 @@ public class HomePagesTests extends TestBase {
 
     @Test
     public void goToEventsTest()  {
-        homePage.waitUntilPageLoad()
-                .pressGoToEventButton();
+        homePage.pressGoToEventButton();
         eventsUnAuthPage.waitUntilPageLoad();
         Assert.assertEquals("Find event",eventsUnAuthPage.getHeader());
     }
