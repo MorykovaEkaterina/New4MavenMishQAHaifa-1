@@ -1,0 +1,5 @@
+<root>
+    <item name='ru.stqa.selenium.factory.WebDriverPool'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

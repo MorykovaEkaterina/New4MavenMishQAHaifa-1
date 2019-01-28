@@ -1,10 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.apache.log4j.Logger;
 import util.LogLog4j;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public class LoginPageHelper extends PageBase {
         Log.info("LoginPageHelper: Cancel button was loaded");
         waitUntilElementIsLoaded(driver,
                 cancelButton,
-                20);
+                45);
         return this;
     }
 
@@ -65,14 +64,14 @@ public class LoginPageHelper extends PageBase {
     public LoginPageHelper pressLogInButton() {
         Log.info("LoginPageHelper: --- pressLogInButton() ---");
         Log.info("LoginPageHelper: wait until Login button is loaded");
-        waitUntilElementIsLoaded(driver, loginButton, 20);
+        waitUntilElementIsLoaded(driver, loginButton, 45);
         Log.info("LoginPageHelper: click on Login button");
         loginButton.click();
         return this;
     }
 
     public String getAlertText() {
-        waitUntilElementIsLoaded(driver, alertText,30);
+        waitUntilElementIsLoaded(driver, alertText,45);
     return alertText.getText();
 
     }
@@ -87,17 +86,17 @@ public class LoginPageHelper extends PageBase {
     public LoginPageHelper waitUntilWindowIsClosed(){
         Log.info("LoginPageHelper: --- waitUntilWindowIsClosed() ---");
         Log.info("LoginPageHelper: wait until Cancel button is absent");
-        waitUntilElementIsAbsent(driver, cancelButton,30);
+        waitUntilElementIsAbsent(driver, cancelButton,45);
         return this;
     }
 
     public String getAlertEmail() {
-        waitUntilElementIsLoaded(driver, alertEmail, 30);
+        waitUntilElementIsLoaded(driver, alertEmail, 45);
         return alertEmail.getText();
     }
 
     public String getAlertPassword() {
-        waitUntilElementIsLoaded(driver, alertPassword, 30);
+        waitUntilElementIsLoaded(driver, alertPassword, 45);
         return alertPassword.getText();
     }
 

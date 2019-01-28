@@ -1,5 +1,8 @@
 <component name="libraryTable">
   <library name="Maven: ru.stqa.selenium:webdriver-factory:4.3">
+    <ANNOTATIONS>
+      <root url="file://$PROJECT_DIR$" />
+    </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/ru/stqa/selenium/webdriver-factory/4.3/webdriver-factory-4.3.jar!/" />
     </CLASSES>

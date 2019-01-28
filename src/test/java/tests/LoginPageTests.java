@@ -1,17 +1,15 @@
 package tests;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.EventsAuthPageHelper;
 import pages.HomePageHelper;
 import pages.LoginPageHelper;
 import pages.MenuPageHelper;
-import ru.stqa.selenium.factory.WebDriverPool;
 import util.DataProviders;
-import org.apache.log4j.Logger;
 import util.LogLog4j;
 
 /**
@@ -41,12 +39,13 @@ public class LoginPageTests extends TestBase {
 
     }
 
-    @Test(dataProviderClass = DataProviders.class, dataProvider = "loginPositive")
-    public void loginPositive(String email, String password)  {
+    @Test(groups = {"sanity","regression"},dataProviderClass = DataProviders.class, dataProvider = "loginPositive")
+    public void loginPositive(String email, String password) throws InterruptedException {
         Log.info("--------Test loginPositive was started---------");
         Log.info("Parameter: email = " + email);
         Log.info("Parameter: password = " + password);
         Log.info("Test login Positive: homePage was opened");
+        //Thread.sleep(500);
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail(email)
                 .enterValueToFieldPassword(password)
@@ -65,12 +64,13 @@ public class LoginPageTests extends TestBase {
 
     }
 
-    @Test( dataProviderClass = DataProviders.class, dataProvider = "loginNegative")
-    public void loginNegativeNoSuchUser(String email, String password){
+    @Test( groups = {"regression","negative"},dataProviderClass = DataProviders.class, dataProvider = "loginNegative")
+    public void loginNegativeNoSuchUser(String email, String password) throws InterruptedException {
         Log.info("--------- Test loginNegative was started -----------");
         Log.info("Parameter - email: " + email);
         Log.info("Parameter - password: " + password);
         Log.info("loginNegative: loginPage was opened");
+        Thread.sleep(500);
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail(email)
                 .enterValueToFieldPassword(password)
@@ -82,9 +82,10 @@ public class LoginPageTests extends TestBase {
        loginPage.pressCancelButton()
                .waitUntilWindowIsClosed();
     }
-    @Test(dataProviderClass = DataProviders.class,
+    @Test(groups = {"regression","negative"},dataProviderClass = DataProviders.class,
             dataProvider = "loginNegativeIncorrectPassword")
-    public void loginNegativePasswordIncorrect(String email, String password){
+    public void loginNegativePasswordIncorrect(String email, String password) throws InterruptedException {
+        Thread.sleep(500);
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldPassword(password)
                 .enterValueToFieldEmail(email);
@@ -95,9 +96,10 @@ public class LoginPageTests extends TestBase {
                 .waitUntilWindowIsClosed();
     }
 
-    @Test(dataProviderClass = DataProviders.class,
+    @Test(groups = {"regression","negative"},dataProviderClass = DataProviders.class,
             dataProvider = "loginNegativeIncorrectEmail")
-    public void loginNegativeEmailIncorrect(String email, String password){
+    public void loginNegativeEmailIncorrect(String email, String password) throws InterruptedException {
+        Thread.sleep(500);
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail(email)
                 .enterValueToFieldPassword(password);
@@ -108,8 +110,9 @@ public class LoginPageTests extends TestBase {
                 .waitUntilWindowIsClosed();
     }
 
-    @Test
-    public void loginNegativeEmptyEmailPassword(){
+    @Test(groups = {"regression","negative"})
+    public void loginNegativeEmptyEmailPassword() throws InterruptedException {
+        Thread.sleep(500);
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail("")
                 .enterValueToFieldPassword("")
@@ -117,8 +120,9 @@ public class LoginPageTests extends TestBase {
         Assert.assertEquals(2,loginPage.getQuantityAlertsForEmptyFields());
     }
 
-    @Test
-    public void loginNegativeOnlyEmailIsEmpty(){
+    @Test(groups = {"regression","negative"})
+    public void loginNegativeOnlyEmailIsEmpty() throws InterruptedException {
+        Thread.sleep(500);
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldEmail("")
                 .enterValueToFieldPassword("567890fgd")
@@ -126,8 +130,9 @@ public class LoginPageTests extends TestBase {
         Assert.assertEquals(1,loginPage.getQuantityAlertsForEmptyFields());
     }
 
-    @Test
-    public void loginNegativeOnlyPasswordIsEmpty(){
+    @Test(groups = {"regression","negative"})
+    public void loginNegativeOnlyPasswordIsEmpty() throws InterruptedException {
+        Thread.sleep(500);
         loginPage.waitUntilPageLoad()
                 .enterValueToFieldPassword("")
                 .enterValueToFieldEmail("test@mail.com")
